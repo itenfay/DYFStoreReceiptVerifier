@@ -1,33 +1,29 @@
-## [英文文档（English Document）](README-en.md)
-
-
-如果此项目能帮助到你，就请你给[一颗星](https://github.com/dgynfi/DYFStoreReceiptVerifier)。谢谢！
-
-
 ## DYFStoreReceiptVerifier
 
-一个开源的收据验证客户端程序。建议你使用自己的服务器获取从客户端上传的参数，以验证来自App Store服务器的收据的响应信息（C -> 上传的参数 -> S -> App Store S -> S -> 接收并解析数据 -> C，C:客户端，S:服务器）。
+An open source receipt verification client program. It is recommended that use your own server to obtain the parameters uploaded from the client to verify the receipt from the App Store server (C -> Uploaded Parameters -> S -> App Store S -> S -> Receive And Parse Data -> C, C: client, S: server).
 
 [![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](LICENSE)&nbsp;
 
+[Chinese Instructions (中文说明)](README-zh.md)
 
-## QQ群 (ID:614799921)
+
+## Group (ID:614799921)
 
 <div align=left>
 &emsp; <img src="https://github.com/dgynfi/DYFStoreReceiptVerifier/raw/master/images/g614799921.jpg" width="30%" />
 </div>
 
 
-## 使用
+## Usage
 
-- 验证 URL 地址
+- URL for verification
 
-1、测试地址 (Sandbox)：`https://sandbox.itunes.apple.com/verifyReceipt` <br />
-2、生产地址 (Production)：`https://buy.itunes.apple.com/verifyReceipt`
+1. Sandbox URL: `https://sandbox.itunes.apple.com/verifyReceipt` <br />
+2. Production URL: `https://buy.itunes.apple.com/verifyReceipt`
 
-- 引用验证器
+- Reference verifier
 
-通过使用延迟加载创建并返回收据验证器（`DYFStoreReceiptVerifier`）。
+You create and return a receipt verifier(`DYFStoreReceiptVerifier`) by using lazy loading.
 
 ```
 - (DYFStoreReceiptVerifier *)receiptVerifier {
@@ -39,9 +35,9 @@
 }
 ```
 
-- 验证器委托收据验证
+- The verifier delegates receipt verification
 
-1、遵守`DYFStoreReceiptVerifierDelegate`协议:
+1. Using the `DYFStoreReceiptVerifierDelegate` protocol:
 
 ```
 - (void)verifyReceiptDidFinish:(nonnull DYFStoreReceiptVerifier *)verifier didReceiveData:(nullable NSDictionary *)data;
@@ -49,7 +45,7 @@
 - (void)verifyReceipt:(nonnull DYFStoreReceiptVerifier *)verifier didFailWithError:(nonnull NSError *)error;
 ```
 
-2、实现协议
+2. You provide your own implementation.
 
 ```
 - (void)verifyReceiptDidFinish:(nonnull DYFStoreReceiptVerifier *)verifier didReceiveData:(nullable NSDictionary *)data {
@@ -61,7 +57,7 @@
 }
 ```
 
-- 验证收据
+- Verify the receipt
 
 ```
 // Fetches the data of the bundle’s App Store receipt. 
@@ -74,7 +70,7 @@ DYFStoreLog(@"data: %@", data);
 //[_receiptVerifier verifyReceipt:data sharedSecret:@"A43512564ACBEF687924646CAFEFBDCAEDF4155125657"];
 ```
 
-- 状态码和描述
+- The status code and description
 
 ```
 /**
@@ -127,16 +123,16 @@ DYFStoreLog(@"data: %@", data);
 ```
 
 
-## 要求
+## Requirements
 
-`DYFStoreReceiptVerifier`需要`iOS 7.0`或更高版本和ARC。
-
-
-## 演示
-
-如需了解更多，请查看[Demo](https://github.com/dgynfi/DYFStoreKit/blob/master/DYFStoreKitDemo/DYFStoreManager.m)。
+`DYFStoreReceiptVerifier` requires `iOS 7.0` or above and `ARC`.
 
 
-## 欢迎反馈
+## Demo
 
-如果你注意到任何问题，被卡住或只是想聊天，请随意创建一个问题。我很乐意帮助你。
+To learn more, please check out [Demo](https://github.com/dgynfi/DYFStoreKit/blob/master/DYFStoreKitDemo/DYFStoreManager.m).
+
+
+## Feedback is welcome
+
+If you notice any issue, got stuck or just want to chat feel free to create an issue. I will be happy to help you.
