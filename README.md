@@ -1,6 +1,8 @@
 ## DYFStoreReceiptVerifier
 
-An open source receipt verification client program. It is recommended that use your own server to obtain the parameters uploaded from the client to verify the receipt from the App Store server (C -> Uploaded Parameters -> S -> App Store S -> S -> Receive And Parse Data -> C, C: client, S: server).
+An open source receipt verification program for iOS. 
+
+It is recommended that use your own server to obtain the parameters uploaded from the client to verify the receipt from the App Store server (C -> Uploaded Parameters -> S -> App Store S -> S -> Receive And Parse Data -> C, C: client, S: server).
 
 [![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](LICENSE)&nbsp;
 
@@ -10,8 +12,22 @@ An open source receipt verification client program. It is recommended that use y
 ## Group (ID:614799921)
 
 <div align=left>
-&emsp; <img src="https://github.com/dgynfi/DYFStoreReceiptVerifier/raw/master/images/g614799921.jpg" width="30%" />
+&emsp; <img src="https://github.com/chenxing640/DYFStoreReceiptVerifier/raw/master/images/g614799921.jpg" width="30%" />
 </div>
+
+
+## Installation
+
+Using [CocoaPods](https://cocoapods.org):
+
+```
+use_frameworks!
+target 'Your target name'
+
+pod 'DYFStoreReceiptVerifier'
+Or
+pod 'DYFStoreReceiptVerifier', '~> 1.1.0'
+```
 
 
 ## Usage
@@ -59,14 +75,27 @@ You create and return a receipt verifier(`DYFStoreReceiptVerifier`) by using laz
 
 - Verify the receipt
 
+- Step1:
+
+Fetches the data of the bundle’s App Store receipt.
+
 ```
-// Fetches the data of the bundle’s App Store receipt. 
+// receiptData: the data of the bundle’s App Store receipt. 
 NSData *data = receiptData ?: [NSData dataWithContentsOfURL:DYFStore.receiptURL];
 DYFStoreLog(@"data: %@", data);
+```
 
+- Step2:
+
+Verifies the in-app purchase receipt.
+
+```
 [_receiptVerifier verifyReceipt:data];
+```
 
-// Only used for receipts that contain auto-renewable subscriptions.
+Your app’s shared secret (a hexadecimal string). Only used for receipts that contain auto-renewable subscriptions.
+
+```
 //[_receiptVerifier verifyReceipt:data sharedSecret:@"A43512564ACBEF687924646CAFEFBDCAEDF4155125657"];
 ```
 
@@ -81,7 +110,6 @@ DYFStoreLog(@"data: %@", data);
  */
 - (NSString *)matchMessageWithStatus:(NSInteger)status {
     NSString *message = @"";
-    
     switch (status) {
         case 0:
             message = @"The receipt as a whole is valid.";
@@ -117,7 +145,6 @@ DYFStoreLog(@"data: %@", data);
             message = @"Internal data access error.";
             break;
     }
-    
     return message;
 }
 ```
@@ -130,9 +157,9 @@ DYFStoreLog(@"data: %@", data);
 
 ## Demo
 
-To learn more, please check out [Demo](https://github.com/dgynfi/DYFStoreKit/blob/master/DYFStoreKitDemo/DYFStoreManager.m).
+To learn more, please check out [Demo](https://github.com/chenxing640/DYFStoreKit/blob/master/DYFStoreKitDemo/DYFStoreManager.m).
 
 
 ## Feedback is welcome
 
-If you notice any issue, got stuck or just want to chat feel free to create an issue. I will be happy to help you.
+If you notice any issue, got stuck to create an issue. I will be happy to help you.

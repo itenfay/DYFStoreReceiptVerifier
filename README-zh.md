@@ -1,6 +1,8 @@
 ## DYFStoreReceiptVerifier
 
-一个开源的收据验证客户端程序。建议你使用自己的服务器获取从客户端上传的参数，以验证来自App Store服务器的收据的响应信息（C -> 上传的参数 -> S -> App Store S -> S -> 接收并解析数据 -> C，C:客户端，S:服务器）。
+一个开源的iOS收据验证程序。
+
+建议你使用自己的服务器获取从客户端上传的参数，以验证来自App Store服务器的收据的响应信息（C -> 上传的参数 -> S -> App Store S -> S -> 接收并解析数据 -> C，C:客户端，S:服务器）。
 
 [![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](LICENSE)&nbsp;
 
@@ -8,8 +10,22 @@
 ## QQ群 (ID:614799921)
 
 <div align=left>
-&emsp; <img src="https://github.com/dgynfi/DYFStoreReceiptVerifier/raw/master/images/g614799921.jpg" width="30%" />
+&emsp; <img src="https://github.com/chenxing640/DYFStoreReceiptVerifier/raw/master/images/g614799921.jpg" width="30%" />
 </div>
+
+
+## 安装
+
+Using [CocoaPods](https://cocoapods.org):
+
+```
+use_frameworks!
+target 'Your target name'
+
+pod 'DYFStoreReceiptVerifier'
+Or
+pod 'DYFStoreReceiptVerifier', '~> 1.1.0'
+```
 
 
 ## 使用
@@ -57,14 +73,27 @@
 
 - 验证收据
 
+- 步骤1:
+
+获取应用商店收据的数据。
+
 ```
-// Fetches the data of the bundle’s App Store receipt. 
+// receiptData: the data of the bundle’s App Store receipt.
 NSData *data = receiptData ?: [NSData dataWithContentsOfURL:DYFStore.receiptURL];
 DYFStoreLog(@"data: %@", data);
+```
 
+- 步骤2:
+
+验证应用内购买收据。
+
+```
 [_receiptVerifier verifyReceipt:data];
+```
 
-// Only used for receipts that contain auto-renewable subscriptions.
+验证用于包含自动续订套餐的收据，需要应用的共享密钥(十六进制字符串)。
+
+```
 //[_receiptVerifier verifyReceipt:data sharedSecret:@"A43512564ACBEF687924646CAFEFBDCAEDF4155125657"];
 ```
 
@@ -79,7 +108,6 @@ DYFStoreLog(@"data: %@", data);
  */
 - (NSString *)matchMessageWithStatus:(NSInteger)status {
     NSString *message = @"";
-    
     switch (status) {
         case 0:
             message = @"The receipt as a whole is valid.";
@@ -115,7 +143,6 @@ DYFStoreLog(@"data: %@", data);
             message = @"Internal data access error.";
             break;
     }
-    
     return message;
 }
 ```
@@ -128,10 +155,9 @@ DYFStoreLog(@"data: %@", data);
 
 ## 演示
 
-如需了解更多，请查看[Demo](https://github.com/dgynfi/DYFStoreKit/blob/master/DYFStoreKitDemo/DYFStoreManager.m)。
+如需了解更多，请查看[Demo](https://github.com/chenxing640/DYFStoreKit/blob/master/DYFStoreKitDemo/DYFStoreManager.m)。
 
 
 ## 欢迎反馈
 
-如果你注意到任何问题，被卡住或只是想聊天，请随意创建一个问题。我很乐意帮助你。
-
+如果你注意到任何问题被卡住，请创建一个问题。我很乐意帮助你。

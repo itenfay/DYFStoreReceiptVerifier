@@ -1,8 +1,8 @@
 //
 //  DYFStoreReceiptVerifier.m
 //
-//  Created by dyf on 2014/11/4. ( https://github.com/dgynfi/DYFStoreReceiptVerifier )
-//  Copyright © 2014 dyf. All rights reserved.
+//  Created by chenxing on 2014/11/4. ( https://github.com/chenxing640/DYFStoreReceiptVerifier )
+//  Copyright © 2014 chenxing. All rights reserved.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -124,11 +124,9 @@ static NSString *const kProductUrl = @"https://buy.itunes.apple.com/verifyReceip
 }
 
 - (void)verifyReceipt:(NSData *)receiptData sharedSecret:(NSString *)secretKey {
-    
     if (receiptData == nil) {
-        
         NSString *message = @"The received data is null.";
-        NSError *error = [NSError errorWithDomain:@"SRErrorDomain.DYFStore"
+        NSError *error = [NSError errorWithDomain:@"SKErrorDomain.verifyReceipt"
                                              code:-12
                                          userInfo:@{NSLocalizedDescriptionKey: message}];
         
@@ -182,14 +180,12 @@ static NSString *const kProductUrl = @"https://buy.itunes.apple.com/verifyReceip
 }
 
 - (void)didReceiveData:(NSData *)data response:(NSURLResponse *)response error:(NSError *)error {
-    
     if (!error) {
         [self processResult:data];
         return;
     }
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        
         if (SR_RESPONDS_TO_SEL(self.delegate, @selector(verifyReceipt:didFailWithError:))) {
             [self.delegate verifyReceipt:self didFailWithError:error];
         }
@@ -203,38 +199,28 @@ static NSString *const kProductUrl = @"https://buy.itunes.apple.com/verifyReceip
     NSDictionary *dict = (NSDictionary *)jsonObj;
     
     if (!error) {
-        
         NSInteger status = [[dict objectForKey:@"status"] integerValue];
         if (status == 0) {
-            
             dispatch_async(dispatch_get_main_queue(), ^{
-                
                 if (SR_RESPONDS_TO_SEL(self.delegate, @selector(verifyReceiptDidFinish:didReceiveData:))) {
                     [self.delegate verifyReceiptDidFinish:self didReceiveData:dict];
                 }
             });
         } else if (status == 21007) { // sandbox
-            
             [self connectWithUrl:kSandboxUrl];
         } else {
-            
             NSString *message = [self matchMessageWithStatus:status];
-            NSError *error = [NSError errorWithDomain:@"SRErrorDomain.DYFStore"
+            NSError *error = [NSError errorWithDomain:@"SKErrorDomain.verifyReceipt"
                                                  code:status
                                              userInfo:@{NSLocalizedDescriptionKey: message}];
-            
             dispatch_async(dispatch_get_main_queue(), ^{
-                
                 if (SR_RESPONDS_TO_SEL(self.delegate, @selector(verifyReceipt:didFailWithError:))) {
                     [self.delegate verifyReceipt:self didFailWithError:error];
                 }
             });
         }
-        
     } else {
-        
         dispatch_async(dispatch_get_main_queue(), ^{
-            
             if (SR_RESPONDS_TO_SEL(self.delegate, @selector(verifyReceipt:didFailWithError:))) {
                 [self.delegate verifyReceipt:self didFailWithError:error];
             }
