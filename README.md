@@ -5,6 +5,8 @@ An open source receipt verification program for iOS.
 It is recommended that use your own server to obtain the parameters uploaded from the client to verify the receipt from the App Store server (C -> Uploaded Parameters -> S -> App Store S -> S -> Receive And Parse Data -> C, C: client, S: server).
 
 [![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](LICENSE)&nbsp;
+[![CocoaPods Version](http://img.shields.io/cocoapods/v/DYFStoreReceiptVerifier.svg?style=flat)](http://cocoapods.org/pods/DYFStoreReceiptVerifier)&nbsp;
+![CocoaPods Platform](http://img.shields.io/cocoapods/p/DYFStoreReceiptVerifier.svg?style=flat)&nbsp;
 
 [Chinese Instructions (中文说明)](README-zh.md)
 
@@ -26,7 +28,7 @@ target 'Your target name'
 
 pod 'DYFStoreReceiptVerifier'
 Or
-pod 'DYFStoreReceiptVerifier', '~> 1.1.0'
+pod 'DYFStoreReceiptVerifier', '~> 1.1.2'
 ```
 
 

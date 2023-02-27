@@ -2,9 +2,11 @@
 
 一个开源的iOS收据验证程序。
 
-建议你使用自己的服务器获取从客户端上传的参数，以验证来自App Store服务器的收据的响应信息（C -> 上传的参数 -> S -> App Store S -> S -> 接收并解析数据 -> C，C:客户端，S:服务器）。
+建议使用自己的服务器获取从客户端上传的参数，以验证来自App Store服务器的收据的响应信息（C -> 上传的参数 -> S -> App Store S -> S -> 接收并解析数据 -> C，C:客户端，S:服务器）。
 
 [![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](LICENSE)&nbsp;
+[![CocoaPods Version](http://img.shields.io/cocoapods/v/DYFStoreReceiptVerifier.svg?style=flat)](http://cocoapods.org/pods/DYFStoreReceiptVerifier)&nbsp;
+![CocoaPods Platform](http://img.shields.io/cocoapods/p/DYFStoreReceiptVerifier.svg?style=flat)&nbsp;
 
 
 ## QQ群 (ID:614799921)
@@ -24,7 +26,7 @@ target 'Your target name'
 
 pod 'DYFStoreReceiptVerifier'
 Or
-pod 'DYFStoreReceiptVerifier', '~> 1.1.0'
+pod 'DYFStoreReceiptVerifier', '~> 1.1.2'
 ```
 
 
