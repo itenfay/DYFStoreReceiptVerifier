@@ -1,6 +1,8 @@
+[English Vision](README.md) | 中文版
+
 ## DYFStoreReceiptVerifier
 
-一个开源的iOS收据验证程序。
+一个开源的iOS收据验证程序([Swift Version](https://github.com/chenxing640/DYFStoreReceiptVerifier_Swift))。
 
 建议使用自己的服务器获取从客户端上传的参数，以验证来自App Store服务器的收据的响应信息（C -> 上传的参数 -> S -> App Store S -> S -> 接收并解析数据 -> C，C:客户端，S:服务器）。
 
@@ -34,7 +36,7 @@ pod 'DYFStoreReceiptVerifier', '~> 1.1.2'
 
 - 验证 URL 地址
 
-1、测试地址 (Sandbox)：`https://sandbox.itunes.apple.com/verifyReceipt` <br />
+1、测试地址 (Sandbox)：`https://sandbox.itunes.apple.com/verifyReceipt` <br>
 2、生产地址 (Production)：`https://buy.itunes.apple.com/verifyReceipt`
 
 - 引用验证器
