@@ -1,47 +1,48 @@
-[English Vision](README.md) | 中文版
+English Vision | [中文版](README-zh.md)
 
 ## DYFStoreReceiptVerifier
 
-一个开源的iOS收据验证程序([Swift Version](https://github.com/chenxing640/DYFStoreReceiptVerifier_Swift))。
+An open source receipt verification program for iOS([Swift Version](https://github.com/itenfay/DYFStoreReceiptVerifier_Swift)). 
 
-建议使用自己的服务器获取从客户端上传的参数，以验证来自App Store服务器的收据的响应信息（C -> 上传的参数 -> S -> App Store S -> S -> 接收并解析数据 -> C，C:客户端，S:服务器）。
+It is recommended that use your own server to obtain the parameters uploaded from the client to verify the receipt from the App Store server (C -> Uploaded Parameters -> S -> App Store S -> S -> Receive And Parse Data -> C, C: client, S: server).
 
 [![License MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](LICENSE)&nbsp;
 [![CocoaPods Version](http://img.shields.io/cocoapods/v/DYFStoreReceiptVerifier.svg?style=flat)](http://cocoapods.org/pods/DYFStoreReceiptVerifier)&nbsp;
 ![CocoaPods Platform](http://img.shields.io/cocoapods/p/DYFStoreReceiptVerifier.svg?style=flat)&nbsp;
 
 
-## QQ群 (ID:614799921)
+## Group (ID:614799921)
 
 <div align=left>
-&emsp; <img src="https://github.com/chenxing640/DYFStoreReceiptVerifier/raw/master/images/g614799921.jpg" width="30%" />
+&emsp; <img src="https://github.com/itenfay/DYFStoreReceiptVerifier/raw/master/images/g614799921.jpg" width="30%" />
 </div>
 
 
-## 安装
+## Installation
 
 Using [CocoaPods](https://cocoapods.org):
 
 ```
-use_frameworks!
-target 'Your target name'
-
 pod 'DYFStoreReceiptVerifier'
+```
+
 Or
-pod 'DYFStoreReceiptVerifier', '~> 1.1.2'
+
+```
+pod 'DYFStoreReceiptVerifier', '~> 1.2.0'
 ```
 
 
-## 使用
+## Usage
 
-- 验证 URL 地址
+- The URLs for verification.
 
-1、测试地址 (Sandbox)：`https://sandbox.itunes.apple.com/verifyReceipt` <br>
-2、生产地址 (Production)：`https://buy.itunes.apple.com/verifyReceipt`
+1. Sandbox URL: `https://sandbox.itunes.apple.com/verifyReceipt` <br>
+2. Production URL: `https://buy.itunes.apple.com/verifyReceipt`
 
-- 引用验证器
+- The reference verifier.
 
-通过使用延迟加载创建并返回收据验证器（`DYFStoreReceiptVerifier`）。
+You create and return a receipt verifier(`DYFStoreReceiptVerifier`) by using lazy loading.
 
 ```
 - (DYFStoreReceiptVerifier *)receiptVerifier {
@@ -53,17 +54,16 @@ pod 'DYFStoreReceiptVerifier', '~> 1.1.2'
 }
 ```
 
-- 验证器委托收据验证
+- The verifier delegates receipt verification.
 
-1、遵守`DYFStoreReceiptVerifierDelegate`协议:
+1. Using the `DYFStoreReceiptVerifierDelegate` protocol:
 
 ```
 - (void)verifyReceiptDidFinish:(nonnull DYFStoreReceiptVerifier *)verifier didReceiveData:(nullable NSDictionary *)data;
-
 - (void)verifyReceipt:(nonnull DYFStoreReceiptVerifier *)verifier didFailWithError:(nonnull NSError *)error;
 ```
 
-2、实现协议
+2. You provide your own implementation.
 
 ```
 - (void)verifyReceiptDidFinish:(nonnull DYFStoreReceiptVerifier *)verifier didReceiveData:(nullable NSDictionary *)data {
@@ -75,33 +75,33 @@ pod 'DYFStoreReceiptVerifier', '~> 1.1.2'
 }
 ```
 
-- 验证收据
+- Verifies the receipt.
 
-- 步骤1:
+- Step1:
 
-获取应用商店收据的数据。
+Fetches the data of the bundle’s App Store receipt.
 
 ```
-// receiptData: the data of the bundle’s App Store receipt.
+// receiptData: the data of the bundle’s App Store receipt. 
 NSData *data = receiptData ?: [NSData dataWithContentsOfURL:DYFStore.receiptURL];
 DYFStoreLog(@"data: %@", data);
 ```
 
-- 步骤2:
+- Step2:
 
-验证应用内购买收据。
+Verifies the in-app purchase receipt.
 
 ```
 [_receiptVerifier verifyReceipt:data];
 ```
 
-验证用于包含自动续订套餐的收据，需要应用的共享密钥(十六进制字符串)。
+Your app’s shared secret (a hexadecimal string). Only used for receipts that contain auto-renewable subscriptions.
 
 ```
-//[_receiptVerifier verifyReceipt:data sharedSecret:@"A43512564ACBEF687924646CAFEFBDCAEDF4155125657"];
+[_receiptVerifier verifyReceipt:data sharedSecret:@"A43512564ACBEF687924646CAFEFBDCAEDF4155125657"];
 ```
 
-- 状态码和描述
+- The status code and description.
 
 ```
 /**
@@ -152,16 +152,16 @@ DYFStoreLog(@"data: %@", data);
 ```
 
 
-## 要求
+## Requirements
 
-`DYFStoreReceiptVerifier`需要`iOS 7.0`或更高版本和ARC。
-
-
-## 演示
-
-如需了解更多，请查看[Demo](https://github.com/chenxing640/DYFStoreKit/blob/master/DYFStoreKitDemo/DYFStoreManager.m)。
+`DYFStoreReceiptVerifier` requires `iOS 7.0` or above and `ARC`.
 
 
-## 欢迎反馈
+## Demo
 
-如果你注意到任何问题被卡住，请创建一个问题。我很乐意帮助你。
+To learn more, please check out [Demo](https://github.com/itenfay/DYFStoreKit/blob/master/DYFStoreKitDemo/Sample/SKIAPManager.m).
+
+
+## Feedback is welcome
+
+If you notice any issue to create an issue. I will be happy to help you.
