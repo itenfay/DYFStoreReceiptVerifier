@@ -1,7 +1,7 @@
 
 Pod::Spec.new do |spec|
   spec.name         = "DYFStoreReceiptVerifier"
-  spec.version      = "1.2.0"
+  spec.version      = "1.2.1"
   spec.summary      = "The verification program of receipts for in app purchases within iOS."
 
   spec.description  = <<-DESC

@@ -29,7 +29,7 @@ pod 'DYFStoreReceiptVerifier'
 Or
 
 ```
-pod 'DYFStoreReceiptVerifier', '~> 1.2.0'
+pod 'DYFStoreReceiptVerifier', '~> 1.2.1'
 ```
 
 
